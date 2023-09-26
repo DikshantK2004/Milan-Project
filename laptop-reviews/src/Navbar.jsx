@@ -1,7 +1,9 @@
 import React from "react";
 import "./Navbar.css";
+import {useNavigate} from "react-router-dom"
 
 function Navbar() {
+  const navigate = useNavigate()
   return (
     <div className="back-img">
       <div className="navbar">
@@ -12,7 +14,7 @@ function Navbar() {
           <div className="item">Laptop</div>
           <div className="item">Testimonials</div>
         </div>
-        <div className="cont">Sign in</div>
+        <div className="cont" onClick={() => navigate("/login")}>Sign in</div>
       </div>
       <div className="mainH">
         <h1>Welcome to Laptop <br />Review</h1>
