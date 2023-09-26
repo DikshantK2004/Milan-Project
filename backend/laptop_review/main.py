@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
-cred = firebase_admin.credentials.Certificate('/home/dikshant/Projects/Milan-Project/backend/laptop_review/service.json')
+cred = firebase_admin.credentials.Certificate(os.path.dirname(__file__) + '/service.json')
 
 firebase_admin.initialize_app(cred,
  { 'databaseURL': os.getenv('DATABASE_URL')})
