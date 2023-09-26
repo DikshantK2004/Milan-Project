@@ -1,0 +1,41 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+body{
+    background-color: black;
+    height: 100vh;
+    margin: 0;
+}
+.loginPage{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    background-image: url(./assets/bgGraphics.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300rem 70rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.google-signin-btn{
+    color: white;
+    border: 2px solid #99AFFFB0;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    border-radius: 6rem;
+    height: fit-content;
+    width: fit-content;
+    background-color: #FFFFFF1F;
+    font-family: 'Jeju Gothic', sans-serif;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+
+}
+#google-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
