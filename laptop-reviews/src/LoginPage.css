@@ -6,12 +6,13 @@ body{
 }
 .loginPage{
     width: 100%;
+    height: 100vh;
     text-align: center;
     display: flex;
     background-image: url(./assets/bgGraphics.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 300rem 70rem;
+    background-size: 200rem 70rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
