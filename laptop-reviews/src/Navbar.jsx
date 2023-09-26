@@ -12,7 +12,7 @@ function Navbar() {
           <div className="item">Laptop</div>
           <div className="item">Testimonials</div>
         </div>
-        <div className="cont">Contact Us</div>
+        <div className="cont">Sign in</div>
       </div>
       <div className="mainH">
         <h1>Welcome to Laptop <br />Review</h1>
