@@ -1,12 +1,10 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-body{
+.pagename{
     background-color: black;
     height: 100vh;
     margin: 0;
-}
-.pagename{
     font-family: 'Poppins', sans-serif;
     color: white;
     font-size: 2rem;
