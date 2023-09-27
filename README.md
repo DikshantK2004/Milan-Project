@@ -4,7 +4,6 @@
 
 # MILAN Hostel Hackathon Project
 
-![MILAN Hackathon](hackathon_image.jpg)
 
 ## Table of Contents
 - [Introduction](#introduction)
