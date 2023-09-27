@@ -12,7 +12,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
+
 .google-signin-btn{
     color: white;
     border: 2px solid #99AFFFB0;
@@ -31,6 +33,7 @@
     z-index: 2;
 
 }
+
 #google-icon{
     width: 1.5rem;
     height: 1.5rem;
