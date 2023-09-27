@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Product.css";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
@@ -13,6 +13,11 @@ import {app} from './firebase.config'
 function Product() {
   const user = useAuth()
   const auth = getAuth(app)
+    const [review, setReview] = useState("")
+    const handler = async(event) =>{
+        event.preventDefault();
+        setReview(event.target.value);
+      }
   return (
     <div>
       <div className="product">
@@ -77,6 +82,8 @@ function Product() {
                 multiline
                 maxRows={4}
                 variant="filled"
+                value={review}
+                onInput={handler}
               />
             </div>
           </Box>
