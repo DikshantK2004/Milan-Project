@@ -7,13 +7,16 @@ readme = "README.md"
 packages = [{include = "laptop_review"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11, <3.12"
 fastapi = "^0.103.1"
 firebase = "^4.0.1"
 python-dotenv = "^1.0.0"
 uvicorn = "^0.23.2"
 firebase-admin = "^6.2.0"
-
+tensorflow = "^2.13.0"
+pandas = "^2.1.1"
+cython = "^3.0.2"
+ktrain = "^0.38.0"
 
 [build-system]
 requires = ["poetry-core"]
