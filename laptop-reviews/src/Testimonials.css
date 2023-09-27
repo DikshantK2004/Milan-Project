@@ -19,6 +19,7 @@
     font-weight: 600;
     color: white;
     width: 60%;
+    text-align: center;
 }
 
 .testauth{
@@ -26,4 +27,5 @@
     font-size: 20px;
     font-weight: 400;
     color: white; 
+    text-align: center;
 }

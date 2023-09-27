@@ -8,7 +8,7 @@ import Carousel from "./Carousel";
 
 function HomePage() {
   return (
-    <div>
+    <div className="App">
       <Navbar />
       <Carousel />
       <Services />
