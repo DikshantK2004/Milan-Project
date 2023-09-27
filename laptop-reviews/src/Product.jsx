@@ -24,6 +24,13 @@ async function dataReturn() {
 function Product() {
   const user = useAuth()
   const auth = getAuth(app)
+  user.getIdToken()
+    .then((authToken) => {
+      console.log('Authentication token:', authToken);
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
     const [review, setReview] = useState("")
     const handler = async(event) =>{
         event.preventDefault();
@@ -41,7 +48,6 @@ function Product() {
     fetchData();
   }, []);
 
-  console.log("Data is here", Data.positive);
   
   return(
     
