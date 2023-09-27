@@ -3,6 +3,6 @@ service.json
 .env
 **/.pyc/*
 **/__pycache__/*
-models
+predictor
 hello.js
 final.csv
