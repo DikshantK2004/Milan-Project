@@ -17,6 +17,14 @@
     margin: 100px 0 100px;
 }
 
+.reviewInput{
+    margin: 20px 0;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .product img{
     border: solid #16163F 2px;
     padding: 30px;
