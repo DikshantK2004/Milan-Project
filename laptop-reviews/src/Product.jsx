@@ -98,7 +98,7 @@ function Product() {
             </div>
           </div>
 
-          <div className="input">
+          <div className="inputreview">
         <h4>Tell us what you feel about this Laptop?</h4>
         <div className="reviewInput">
           <Box
