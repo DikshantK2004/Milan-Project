@@ -42,7 +42,7 @@ function LoginPage() {
             .then(async (result) => {
                 const credentials = GoogleAuthProvider.credentialFromResult(result)
                 const token = credentials.accessToken
-                user = result.user
+                const user = result.user
                 console.log(result.user.metadata.lastSignInTime)
                 console.log("Signed in successfully")
                 navigate("/")
