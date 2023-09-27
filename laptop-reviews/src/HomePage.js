@@ -5,10 +5,12 @@ import Infographics from "./Infographics";
 import About from "./About";
 import Testimonials from "./Testimonials";
 import Carousel from "./Carousel";
+import Product from "./Product";
 
 function HomePage() {
   return (
     <div className="App">
+      <Product />
       <Navbar />
       <Carousel />
       <Services />
