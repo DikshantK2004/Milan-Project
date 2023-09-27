@@ -13,9 +13,9 @@ body{
     letter-spacing: 0.4rem;
     margin-bottom: 2rem;
 }
-.login-box{
+.signup-box{
     width: 24rem;
-    height: 18rem;
+    height: 22rem;
     background-color: #D989FF2B;
     margin-bottom: 2rem;
     border-radius: 1rem;
@@ -28,7 +28,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.loginPage{
+.signupPage{
     width: 100%;
     height: 100vh;
     text-align: center;
@@ -40,29 +40,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.google-signin-btn{
-    color: white;
-    border: 2px solid #99AFFFB0;
-    display: flex;
-    flex-direction: row;
-    padding: 0.8rem;
-    border-radius: 6rem;
-    height: fit-content;
-    width: 20rem;
-    background-color: #FFFFFF1F;
-    font-family: 'Jeju Gothic', sans-serif;
-    font-size: 1.2rem;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 2;
-
-}
-#google-icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.5rem;
 }
 #mail-box{
     width: 18rem;
@@ -80,6 +57,7 @@ body{
     width: 18rem;
     height: 2.4rem;
     border: 2px solid #99AFFFB0;
+    margin-bottom: 1rem;
     color: white;
     border-radius: 0.4rem;
     font-size: 1.1rem;
@@ -87,7 +65,7 @@ body{
     background: transparent;
     font-family: 'Jeju Gothic', sans-serif;
 }
-#signin-btn{
+#signup-btn{
     width: 18rem;
     background-color: #52057B;
     margin-top: 1rem;
@@ -100,32 +78,8 @@ body{
     font-size: 1.1rem;
 
 }
-#signin-btn:hover{
+#signup-btn:hover{
     box-shadow: 1px 1px 20px 5px #6100948A;
-}
-#new-link{
-    text-decoration: none;
-    color: #D2AEFF;
-    font-family: 'Jeju Gothic', sans-serif;
-
-}
-.new-acnt-text{
-    width: 18rem;
-    margin-top: 1rem;
-    color: white;
-    text-align: left;
-    font-size: 0.8rem;
-    font-family: 'Jeju Gothic', sans-serif;
-}
-.forgot-pass-link{
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
-    font-size: 0.8rem;
-    width: 18rem;
-    text-align: right;
-    text-decoration: none;
-    color: #D2AEFF;
-    font-family: 'Jeju Gothic', sans-serif;
 }
 .error-msg{
     background-color: #FFF5E0;
@@ -135,4 +89,7 @@ body{
     top: 0;
     text-align: center;
     font-family: 'Jeju Gothic', sans-serif;
+}
+#new-link{
+    cursor: pointer;
 }
