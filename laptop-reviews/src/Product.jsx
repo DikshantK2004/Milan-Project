@@ -53,7 +53,8 @@ function Product() {
           </div>
         </div>
         <div className="input">
-            <h4>Tell</h4>
+            <h4>Tell us what you feel about this Laptop?</h4>
+            
         </div>
     </div>
   );
