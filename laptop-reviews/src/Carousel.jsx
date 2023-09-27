@@ -103,10 +103,10 @@ function Carousel() {
           <img src={require("./assets/dell_ins.png")} alt="lappy-img" />
         </figure>
         <nav>
-          <button class="nav prev">
+          <button className="nav prev">
             <NavigateBeforeIcon className="prev" />
           </button>
-          <button class="nav next">
+          <button className="nav next">
             <NavigateNextIcon className="next" />
           </button>
         </nav>
