@@ -24,6 +24,8 @@ async function dataReturn() {
 function Product() {
   const user = useAuth()
   const auth = getAuth(app)
+  if(user)
+  {
   user.getIdToken()
     .then((authToken) => {
       console.log('Authentication token:', authToken);
@@ -31,6 +33,7 @@ function Product() {
     .catch((error) => {
       console.error(error.message);
     });
+  }
     const [review, setReview] = useState("")
     const handler = async(event) =>{
         event.preventDefault();
