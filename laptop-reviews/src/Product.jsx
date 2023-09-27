@@ -6,8 +6,13 @@ import CircularProgress from "@mui/joy/CircularProgress";
 import ReviewComponent from "./ReviewComponent";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import useAuth from "./useAuth";
+import { signOut, getAuth } from "firebase/auth";
+import {app} from './firebase.config'
 
 function Product() {
+  const user = useAuth()
+  const auth = getAuth(app)
   return (
     <div>
       <div className="product">
