@@ -1,9 +1,24 @@
 import React from "react";
 import "./Navbar.css";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import useAuth from "./useAuth";
+import { signOut, getAuth } from "firebase/auth";
+import {app} from './firebase.config'
 
 function Navbar() {
+  const user = useAuth()
+  const auth = getAuth(app)
   const navigate = useNavigate()
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/login")
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   return (
     <div className="back-img">
       <div className="navbar">
@@ -14,7 +29,11 @@ function Navbar() {
           <div className="item">Laptop</div>
           <div className="item">Testimonials</div>
         </div>
-        <div className="cont" onClick={() => navigate("/login")}>Sign in</div>
+        {user? (<div className="cont" onClick={handleSignOut}>Sign Out</div>
+        ) : (
+          <div className="cont" onClick={() => navigate("/login")}>Sign in</div>
+        )}
+        {/* <div className="cont" onClick={() => navigate("/login")}>Sign in</div> */}
       </div>
       <div className="mainH">
         <h1>Welcome to Laptop <br />Review</h1>
