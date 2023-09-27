@@ -9,9 +9,17 @@ import pandas as pd
 import ktrain
 from models import Review
 import utils
+import nltk
+nltk.download('all')
+import stanza
+stanza.download('en')
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
+# Create a stanza pipeline
+nlp = stanza.Pipeline()
 
-
-    
+stop_words = set(stopwords.words('english'))  #here we segment data , so we need those categories
+# predictor = ktrain.load_predictor('predictor')
 
 load_dotenv()
 
@@ -37,7 +45,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+#location db.collection('laptops).document(review.laptop) this location contains 10 fields which are to be updated , not set, but i don't remeb=mber the syntax of update, so please check firestore docs or just write formula
+#10 nahi 12
 # checking all the collections in database
 collections = db.collections()
 collections = [collection.id for collection in collections]
@@ -55,20 +64,30 @@ def post_new_review(review: Review):
     if laptop not in collections:
         return {"alert" : False, "message" : f"{laptop} is not in database."}
 
-    uid = utils.verify_id_token(review.token)
+    # uid = utils.verify_id_token(review.token)
     
-    if uid == None:
-        return {"alert" : False, "message" : "Token verification failed."}
+    # if uid == None:
+    #     return {"alert" : False, "message" : "Token verification failed."}
     
     
-    if uid != review.user_id:
-        return {"alert" : False, "message" :"Token not authenticated with user."}
+    # if uid != review.user_id:
+    #     return {"alert" : False, "message" :"Token not authenticated with user."}
 
 
     positive_score = predictor.predict(review.review)
-    
-    db.collections(laptop).document(review.user_id).add({"username" : review.username, "review" : review.review, "score": positive_score})
-    
+    aspect_scores = utils.get_aspect_scores(review.review)
+    tag_values = [(key, value) for (key,value) in aspect_scores if value!=-1]
+    db.collection("laptops").document(laptop).collection("reviews").document(review.user_id).set({"username" : review.username, "review" : review.review, "score": positive_score, "tags": tag_values})
+
+    doc_ref = db.collection('laptops').document(laptop)
+    doc = doc_ref.get()
+    doc_dict = doc.to_dict()
+    doc_dict['score'] = utils.new_average(doc_dict['score'], positive_score, doc_dict['count'])
+    doc_dict['count'] += 1
+    for key in tag_values.keys():
+        doc_dict[key] = utils.new_average(doc_dict[key+'_score'], tag_values[key], doc_dict[key+'_count'])
+        doc_dict[key+'_count'] += 1
+    doc_ref.set(doc_dict)
     return {"alert": True}
 
 
