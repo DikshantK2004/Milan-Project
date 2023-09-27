@@ -1,0 +1,8 @@
+service.json
+.venv
+.env
+**/.pyc/*
+**/__pycache__/*
+models
+hello.js
+final.csv
