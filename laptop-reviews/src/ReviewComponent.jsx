@@ -19,6 +19,9 @@ const labels = {
   const value = 4.5;
 
 function ReviewComponent(props) {
+
+
+
   return (
     <div>
       <div className="item3">
@@ -39,7 +42,7 @@ function ReviewComponent(props) {
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
             />
-            <Box sx={{ ml: 2 }}>{labels[value]}</Box>
+            <Box sx={{ ml: 2 }}>{labels[props.score]}</Box>
           </Box>
         </div>
         {props.review}
