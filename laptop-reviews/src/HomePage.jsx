@@ -12,7 +12,7 @@ import LaptopNames from './LaptopNames';
 function HomePage() {
   return (
     <div className="App">
-      <Navbar />
+      <Navbar isHome={1}/>
       <Carousel />
       <LaptopNames />
       <Services />

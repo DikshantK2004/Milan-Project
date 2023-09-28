@@ -16,15 +16,15 @@ import stanza
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 # Create a stanza pipeline
-nltk.data.path.append(os.path.dirname(__file__) + "/../nltk_data")
-nlp = stanza.Pipeline(dir = os.path.dirname(__file__) + "/../stanza_resources")
+nltk.data.path.append(os.path.dirname(_file_) + "/../nltk_data")
+nlp = stanza.Pipeline(dir = os.path.dirname(_file_) + "/../stanza_resources")
 
 stop_words = set(stopwords.words('english'))  #here we segment data , so we need those categories
 predictor = ktrain.load_predictor('predictor')
 
 load_dotenv()
 
-cred = credentials.Certificate(os.path.dirname(__file__) + '/service.json')
+cred = credentials.Certificate(os.path.dirname(_file_) + '/service.json')
 firebase_admin.initialize_app(cred)
 
 
@@ -94,7 +94,6 @@ async def route():
 # Adding a new laptop to database
 @app.post('/createLaptop')
 async def create_laptop(laptop:str):
-    print("hello")
     path = db.collection('laptops').document(laptop)
     data = {}
     for key in utils.fields:
@@ -103,7 +102,6 @@ async def create_laptop(laptop:str):
     data['score'] = -1
     data['image_url'] = ''
     data['count'] = 0
-    print(data)
     path.set(data)
     return {"alert" : True}
     
@@ -114,8 +112,7 @@ def check_posted(info : Info):
     laptop = info.laptop
     user_id = info.user_id
     token = info.token
-    print(laptop)
-    
+    print("check request came")
     if laptop not in laptops:
         return {"alert" : False, "message" : f"{laptop} is not in database.", "laptop" : laptop}
     
@@ -158,7 +155,6 @@ async def get_laptop(laptop:str):
     
     data = path.get().to_dict()
 
-    print(data)
     
     
     return {"alert" : True, "response" : data}
@@ -191,8 +187,7 @@ def post_new_review(review: Review):
         if type(aspect_scores[key]) == np.float32:
             aspect_scores[key] = aspect_scores[key].item()
     
-    print(aspect_scores)
-    
+
     now = utils.current_time()
     db.collection("laptops").document(laptop).collection("reviews").document(review.user_id).set({"username" : review.username, "review" : review.review, "score": positive_score, "tags": aspect_scores, "date": now})
 
@@ -250,8 +245,4 @@ def get_reviews(laptop:str):
     pos_data.reverse()
     
     data = {field : get_reviews_category(laptop, field)  for field in utils.fields} 
-    print(data)
     return {"alert" : True, "positive" : pos_data, "negative" : neg_data, "data" : data}
-
-
-

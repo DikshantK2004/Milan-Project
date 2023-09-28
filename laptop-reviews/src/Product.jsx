@@ -17,6 +17,7 @@ import Tab from "@mui/material/Tab";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import "./Product.css";
+import Navbar from "./Navbar";
 
 async function dataReturn() {
   const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
@@ -298,6 +299,8 @@ function Product() {
   console.log("data1", Data);
   console.log("data.data", Data1);
   return (
+    <>
+    <Navbar isHome={0}/>
     <div className="product">
       <div className="prodfst">
         <img
@@ -564,7 +567,41 @@ function Product() {
       </Box>
 
       
-      {show_review()}
+      {/* {show_review()} */}
+
+
+      (<div className="inputreview">
+        <h4>Tell us what you feel about this Laptop?</h4>
+        <div className="reviewInput">
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "100ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="filled-multiline-flexible"
+                label="Your Review"
+                multiline
+                maxRows={4}
+                variant="filled"
+                value={review}
+                onInput={handler}
+              />
+            </div>
+          </Box>
+        </div>
+        <Button
+          variant="outlined"
+          sx={{ color: "black" }}
+          onClick={handleReviewSubmit}
+        >
+          Submit
+        </Button>
+      </div>
       <hr
         style={{
           backgroundColor: "#692AA9",
@@ -575,6 +612,7 @@ function Product() {
         }}
       />
     </div>
+    </>
   );
 }
 

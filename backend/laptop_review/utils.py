@@ -83,6 +83,9 @@ def aspect_sentiment_analysis(txt, stop_words, nlp):
         taggedList = nltk.pos_tag(wordsList)
 
         doc = nlp(finaltxt)  # Object of Stanford NLP Pipeline
+        if len(doc.sentences) == 0:
+            return []
+        
         dep_tree = doc.sentences[0].dependencies
         # Getting the dependency relations betwwen the words
         dep_node = []
@@ -145,7 +148,10 @@ fields={
 def get_aspect_scores(review, stop_words, nlp, predictor):
   
   aspect_sentiments = aspect_sentiment_analysis(review, stop_words, nlp)
-
+  
+  if len(aspect_sentiments) == 0:
+      return fields
+  
   i = 0
   sentence=[]
   a=''
@@ -162,4 +168,4 @@ def get_aspect_scores(review, stop_words, nlp, predictor):
         for key in fields.keys():
             if key in stuff.lower():  
                fields[key]=predicted_sentiments[1]
-  return fields         
+  return fields
