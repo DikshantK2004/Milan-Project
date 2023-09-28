@@ -31,6 +31,9 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
+
+
+
 app = FastAPI()
 
 origins = [
@@ -54,6 +57,33 @@ print(laptops)
 # Getting the score predictor
 predictor = ktrain.load_predictor('predictor')
 
+# getting category specific for laptop
+def get_reviews_category(laptop:str, category: str):
+    
+    
+    docs = db.collection('laptops').document(laptop).collection('reviews').get()
+    temp = [doc.to_dict() for doc in docs]
+    
+    
+    for data in temp:
+        data['score'] = utils.convert_to_rating(data['score'])
+        for field in utils.fields:
+            if data['tags'][field] != -1:
+                data['tags'][field] = utils.convert_to_rating(data['tags'][field])
+    
+    def myFunc(x):
+        for field in utils.fields:
+            if field == category:
+                if x['tags'][field] == -1:
+                    return False
+                else :
+                    return True
+            
+            
+
+    result = list(filter(myFunc, temp))
+
+    return result
 
 
 @app.get('/')
@@ -91,8 +121,9 @@ async def get_laptop(laptop:str):
     path = db.collection('laptops').document(laptop)
     
     data = path.get().to_dict()
-    
+
     print(data)
+    
     
     return {"alert" : True, "response" : data}
     
@@ -179,7 +210,13 @@ def get_reviews(laptop:str):
         else:
             pos_data.append(data)
     
+    
     pos_data.reverse()
     
-    return {"alert" : True, "positive" : pos_data, "negative" : neg_data}
+    data = {field : get_reviews_category(laptop, field)  for field in utils.fields} 
+    print(data)
+    return {"alert" : True, "positive" : pos_data, "negative" : neg_data, "data" : data}
+
+
+
     

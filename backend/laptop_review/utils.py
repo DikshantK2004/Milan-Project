@@ -2,7 +2,7 @@ from firebase_admin import auth
 import nltk
 from datetime import datetime
 import pytz
-
+import math
 # Create a timezone object for IST (Indian Standard Time)
 ist = pytz.timezone('Asia/Kolkata')
 
@@ -19,7 +19,7 @@ def verify_id_token(token:str):
 
 # Get rating
 def convert_to_rating(x):
-    x = round(((x*5)/0.5) * 0.5)
+    x = math.ceil(((x*5)/0.5) * 0.5)
     return x
 
 
@@ -152,7 +152,7 @@ def get_aspect_scores(review, stop_words, nlp, predictor):
   for sublist in aspect_sentiments:
     a+=sublist[0]+' '
     for k in sublist[1]:
-      a+=k+' '
+      a+=str(k) +' '
     sentence.append(a)
 
     a=''
