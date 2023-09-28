@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import "./Product.css";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import CircularProgress from "@mui/joy/CircularProgress";
@@ -8,24 +7,21 @@ import ReviewComponent from "./ReviewComponent";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import useAuth from "./useAuth";
-import { signOut, getAuth } from "firebase/auth";
-import { app } from "./firebase.config";
+import { getAuth } from "firebase/auth";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { styled } from '@mui/material/styles';
-import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
+import { styled } from "@mui/material/styles";
+import "./Product.css";
 
 async function dataReturn() {
-  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
+  const fetchData = await fetch("http://127.0.0.1:8000/MacBook Pro", {
     method: "GET",
   });
-
   const dataRes = await fetchData.json();
-
   return dataRes;
 }
 
@@ -39,7 +35,7 @@ async function checkPosted(laptop) {
     console.log("Auth Token couldn't be found");
   }
 
-  const response = await fetch("http://localhost:8000/", {
+  const response = await fetch("http://127.0.0.1:8000/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -52,7 +48,6 @@ async function checkPosted(laptop) {
   });
 
   const dataRes = await response.json();
-
   return dataRes;
 }
 
@@ -68,7 +63,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box >
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -82,32 +77,32 @@ const StyledTabs = styled((props) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  '& .MuiTabs-indicatorSpan': {
+  "& .MuiTabs-indicatorSpan": {
     maxWidth: 40,
-    width: '100%',
-    backgroundColor: '#DDBBFF',
+    width: "100%",
+    backgroundColor: "#DDBBFF",
   },
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
-    textTransform: 'none',
+    textTransform: "none",
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.9)',
-    '&.Mui-selected': {
-      color: '#692AA9',
+    color: "rgba(0, 0, 0, 0.9)",
+    "&.Mui-selected": {
+      color: "#692AA9",
     },
-    '&.Mui-focusVisible': {
-      backgroundColor: '#692AA9',
+    "&.Mui-focusVisible": {
+      backgroundColor: "#692AA9",
     },
-  }),
+  })
 );
 
 TabPanel.propTypes = {
@@ -262,212 +257,217 @@ function Product() {
         Reviews
       </h4>
       <Box
-      sx={{ flexGrow: 1, bgcolor: 'transparent', display: 'flex', height: "100%" }}
-    >
-      <StyledTabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 0, borderColor: 'pink'}}
+        sx={{
+          flexGrow: 1,
+          bgcolor: "transparent",
+          display: "flex",
+          height: "100%",
+        }}
       >
-        <StyledTab label="Overall" {...a11yProps(0)} />
-        <StyledTab label="Battery" {...a11yProps(1)} />
-        <StyledTab label="Processor" {...a11yProps(2)} />
-        <StyledTab label="Display" {...a11yProps(3)} />
-        <StyledTab label="Gaming" {...a11yProps(4)} />
-        <StyledTab label="Sound" {...a11yProps(5)} />
+        <StyledTabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 0, borderColor: "pink" }}
+        >
+          <StyledTab label="Overall" {...a11yProps(0)} />
+          <StyledTab label="Battery" {...a11yProps(1)} />
+          <StyledTab label="Processor" {...a11yProps(2)} />
+          <StyledTab label="Display" {...a11yProps(3)} />
+          <StyledTab label="Gaming" {...a11yProps(4)} />
+          <StyledTab label="Sound" {...a11yProps(5)} />
         </StyledTabs>
 
-      <TabPanel value={value} index={0} >
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        <TabPanel value={value} index={0}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-      <div className="prorev">
-        <div className="pro-div">
-          <h4>Positive</h4>
-          <div className="prod-rev">
-            {Data.positive.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
-          </div>
-        </div>
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <div className="prorev">
+            <div className="pro-div">
+              <h4>Positive</h4>
+              <div className="prod-rev">
+                {Data.positive.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div className="pro-div">
-          <h4>Negative</h4>
-          <div className="prod-rev">
-            {Data.negative.map((item) => (
-              <ReviewComponent
-                review={item.review}
-                score={item.score}
-                username={item.username}
-                date={item.date}
-              />
-            ))}
+            <div className="pro-div">
+              <h4>Negative</h4>
+              <div className="prod-rev">
+                {Data.negative.map((item) => (
+                  <ReviewComponent
+                    review={item.review}
+                    score={item.score}
+                    username={item.username}
+                    date={item.date}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </TabPanel>
-    </Box>
-      
+        </TabPanel>
+      </Box>
+
       <div className="inputreview">
         <h4>Tell us what you feel about this Laptop?</h4>
         <div className="reviewInput">
