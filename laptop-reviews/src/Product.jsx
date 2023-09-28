@@ -25,14 +25,21 @@ async function dataReturn() {
   return dataRes;
 }
 
-async function getLaptop(laptop)
-  {
-    const fetchData = await fetch("http://192.168.0.112:8000/score/MacBook Pro", {
-      method: "GET",
-    });
-    const dataRes = await fetchData.json();
-    return dataRes.response;
-  }
+async function dataReturnData() {
+  const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
+    method: "GET",
+  });
+  const dataRes = await fetchData.json();
+  return dataRes.data;
+}
+
+async function getLaptop(laptop) {
+  const fetchData = await fetch("http://192.168.0.112:8000/score/MacBook Pro", {
+    method: "GET",
+  });
+  const dataRes = await fetchData.json();
+  return dataRes.response;
+}
 
 async function checkPosted(laptop) {
   const user = getAuth().currentUser;
@@ -128,7 +135,6 @@ function a11yProps(index) {
 }
 
 function Product() {
-  const laptop_name = "MacBook Pro";
   const navigate = useNavigate();
   const user = useAuth();
   const [value, setValue] = React.useState(0);
@@ -136,7 +142,7 @@ function Product() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   const [review, setReview] = useState("");
   const [laptop, setLaptop] = useState({});
   // const [laptopData, setlaptopdata] = useState({});
@@ -163,21 +169,22 @@ function Product() {
     }
   };
 
-  
   const [posted, setPosted] = useState({});
   const [resp, setResp] = useState({});
+  const [Data1, setData1] = useState({battery:[],process:[], display:[], gaming:[], sound:[]});
   const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
-  const [lapDat, setLapDat] = useState(null)
+  const [lapDat, setLapDat] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await dataReturn();
       const response2 = await checkPosted("MacBook Pro");
-      const response3 = await getLaptop('MacBook Pro');
+      const response3 = await getLaptop("MacBook Pro");
+      const response4 = await dataReturnData();
       console.log("inside useeffcet");
       setData(response);
       setPosted(response2);
       setLaptop(response3);
-      setResp(response3)
+      setData1(response4);
       console.log("laptop inside use", resp);
       // setData(resp)
     };
@@ -186,7 +193,8 @@ function Product() {
   }, []);
 
   console.log("laptop here", laptop);
-  console.log("dt", Data);
+  console.log("data1", Data);
+  console.log("data.data", Data1);
   return (
     <div className="product">
       <div className="prodfst">
@@ -203,66 +211,102 @@ function Product() {
                 <CircularProgress
                   size="lg"
                   determinate
-                  value={Data.positive.length/(laptop.count) * 100}
-                  color={Data.positive.length/(laptop.count) * 100 >= 50 ? "success" : "danger"}
+                  value={(Data.positive.length / laptop.count) * 100}
+                  color={
+                    (Data.positive.length / laptop.count) * 100 >= 50
+                      ? "success"
+                      : "danger"
+                  }
                   sx={{ "--CircularProgress-size": "150px" }}
                 >
                   <Typography sx={{ fontSize: "50px", fontWeight: "700" }}>
-                    {!laptop.count ? " " :Data.positive.length/(laptop.count) * 100+"%"}
+                    {!laptop.count
+                      ? " "
+                      :Math.round((Data.positive.length / laptop.count) * 100) + "%"}
                   </Typography>
                 </CircularProgress>
               </Stack>
             </div>
             <div className="prodcatr">
               <div className="item4">
-              Battery
-                {laptop.battery_score!==-1?<Rating
-                  name="read-only"
-                  value={Math.ceil(laptop.battery_score/0.5)*0.5}
-                  precision={0.5}
-                  size="large"
-                  readOnly
-                />:<div style={{fontWeight:"400"}}>No Battery Reviews Yet!!</div>}
+                Battery
+                {laptop.battery_score !== -1 ? (
+                  <Rating
+                    name="read-only"
+                    value={Math.ceil(laptop.battery_score / 0.1) * 0.5}
+                    precision={0.5}
+                    size="large"
+                    readOnly
+                  />
+                ) : (
+                  <div style={{ fontWeight: "400" }}>
+                    No Battery Reviews Yet!!
+                  </div>
+                )}
               </div>
               <div className="item4">
-              Processor
-                {laptop.process_score!==-1?<Rating
-                  name="read-only"
-                  value={Math.ceil(laptop.process_score/0.5)*0.5}
-                  precision={0.5}
-                  size="large"
-                  readOnly
-                />:<div style={{fontWeight:"400"}}>No Processor Reviews Yet!!</div>}
+                Processor
+                {laptop.process_score !== -1 ? (
+                  <Rating
+                    name="read-only"
+                    value={Math.ceil(laptop.process_score / 0.1) * 0.5}
+                    precision={0.5}
+                    size="large"
+                    readOnly
+                  />
+                ) : (
+                  <div style={{ fontWeight: "400" }}>
+                    No Processor Reviews Yet!!
+                  </div>
+                )}
               </div>
               <div className="item4">
-              Display
-                {laptop.display_score!==-1?<Rating
-                  name="read-only"
-                  value={Math.ceil(laptop.display_score/0.5)*0.5}
-                  precision={0.5}
-                  size="large"
-                  readOnly
-                />:<div style={{fontWeight:"400"}}>No Display Reviews Yet!!</div>}
+                Display
+                {laptop.display_score !== -1 ? (
+                  <Rating
+                    name="read-only"
+                    value={Math.ceil(laptop.display_score / 0.1) * 0.5}
+                    precision={0.5}
+                    size="large"
+                    readOnly
+                  />
+                ) : (
+                  <div style={{ fontWeight: "400" }}>
+                    No Display Reviews Yet!!
+                  </div>
+                )}
               </div>
               <div className="item4">
-              Gaming
-                {laptop.gaming_score!==-1?<Rating
-                  name="read-only"
-                  value={Math.ceil(laptop.gaming_score/0.5)*0.5}
-                  precision={0.5}
-                  size="large"
-                  readOnly
-                />:<div style={{fontWeight:"400"}}>No Gaming Reviews Yet!!</div>}
+                Gaming
+                {laptop.gaming_score !== -1 ? (
+                  <Rating
+                    name="read-only"
+                    value={Math.ceil(laptop.gaming_score / 0.1) * 0.5}
+                    precision={0.5}
+                    size="large"
+                    readOnly
+                  />
+                ) : (
+                  <div style={{ fontWeight: "400" }}>
+                    No Gaming Reviews Yet!!
+                  </div>
+                )}
               </div>
               <div className="item4">
                 Sound
-                {laptop.sound_score!==-1?<Rating
-                  name="read-only"
-                  value={Math.ceil(laptop.sound_score/0.5)*0.5}
-                  precision={0.5}
-                  size="large"
-                  readOnly
-                />:<div style={{fontWeight:"400"}}>No Sound Reviews Yet!!</div>}
+                {laptop.sound_score !== -1 ? (
+                  <Rating
+                    name="read-only"
+                    value={Math.ceil(laptop.sound_score / 0.1) * 0.5}
+                    precision={0.5}
+                    size="large"
+                    readOnly
+                  />
+                ) : (
+                  <div style={{ fontWeight: "400" }}>
+                    No Sound Reviews Yet!!
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -336,23 +380,8 @@ function Product() {
         <TabPanel value={value} index={1}>
           <div className="prorev">
             <div className="pro-div">
-              <h4>Positive</h4>
               <div className="prod-rev">
-                {Data.positive.map((item) => (
-                  <ReviewComponent
-                    review={item.review}
-                    score={item.score}
-                    username={item.username}
-                    date={item.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="pro-div">
-              <h4>Negative</h4>
-              <div className="prod-rev">
-                {Data.negative.map((item) => (
+                {Data1.battery.map((item) => (
                   <ReviewComponent
                     review={item.review}
                     score={item.score}
@@ -365,25 +394,10 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <div className="prorev">
+        <div className="prorev">
             <div className="pro-div">
-              <h4>Positive</h4>
               <div className="prod-rev">
-                {Data.positive.map((item) => (
-                  <ReviewComponent
-                    review={item.review}
-                    score={item.score}
-                    username={item.username}
-                    date={item.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="pro-div">
-              <h4>Negative</h4>
-              <div className="prod-rev">
-                {Data.negative.map((item) => (
+                {Data1.process.map((item) => (
                   <ReviewComponent
                     review={item.review}
                     score={item.score}
@@ -396,25 +410,10 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <div className="prorev">
+        <div className="prorev">
             <div className="pro-div">
-              <h4>Positive</h4>
               <div className="prod-rev">
-                {Data.positive.map((item) => (
-                  <ReviewComponent
-                    review={item.review}
-                    score={item.score}
-                    username={item.username}
-                    date={item.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="pro-div">
-              <h4>Negative</h4>
-              <div className="prod-rev">
-                {Data.negative.map((item) => (
+                {Data1.display.map((item) => (
                   <ReviewComponent
                     review={item.review}
                     score={item.score}
@@ -427,25 +426,10 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <div className="prorev">
+        <div className="prorev">
             <div className="pro-div">
-              <h4>Positive</h4>
               <div className="prod-rev">
-                {Data.positive.map((item) => (
-                  <ReviewComponent
-                    review={item.review}
-                    score={item.score}
-                    username={item.username}
-                    date={item.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="pro-div">
-              <h4>Negative</h4>
-              <div className="prod-rev">
-                {Data.negative.map((item) => (
+                {Data1.gaming.map((item) => (
                   <ReviewComponent
                     review={item.review}
                     score={item.score}
@@ -460,23 +444,8 @@ function Product() {
         <TabPanel value={value} index={5}>
           <div className="prorev">
             <div className="pro-div">
-              <h4>Positive</h4>
               <div className="prod-rev">
-                {Data.positive.map((item) => (
-                  <ReviewComponent
-                    review={item.review}
-                    score={item.score}
-                    username={item.username}
-                    date={item.date}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="pro-div">
-              <h4>Negative</h4>
-              <div className="prod-rev">
-                {Data.negative.map((item) => (
+                {Data1.sound.map((item) => (
                   <ReviewComponent
                     review={item.review}
                     score={item.score}
@@ -522,6 +491,16 @@ function Product() {
           Submit
         </Button>
       </div>
+
+      <hr
+        style={{
+          backgroundColor: "#692AA9",
+          color: "#692AA9",
+          borderColor: "white",
+          height: "2px",
+          padding: "0.7px 0",
+        }}
+      />
     </div>
   );
 }

@@ -18,14 +18,14 @@ const labels = {
   
 
 function ReviewComponent(props) {
-  
+
   return (
     <div>
       <div className="item3">
         <div className="boxdiv">
           <Box
             sx={{
-              width: 200,
+              width: "auto",
               display: "flex",
               alignItems: "center",
             }}
