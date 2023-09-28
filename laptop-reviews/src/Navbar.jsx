@@ -36,8 +36,8 @@ function Navbar() {
         {/* <div className="cont" onClick={() => navigate("/login")}>Sign in</div> */}
       </div>
       <div className="mainH">
-        <h1>Welcome to Laptop <br />Review</h1>
-        <div className="mainD">At Laptop Review, we are dedicated to providing you with the best and most up-to-date reviews of laptops on the market. Our team of experts has years of experience testing and analyzing laptops to help you make the right decision for your needs.</div>
+        <h1>Welcome to OnlyReviews</h1>
+        <div className="mainD">At OnlyReviews, we are dedicated to providing you with the best and most up-to-date reviews of laptops on the market. Our team of experts has years of experience testing and analyzing laptops to help you make the right decision for your needs.</div>
         <div className="cont">Learn More</div>
       </div>
     </div>
