@@ -19,10 +19,6 @@ function HomePage() {
       <Infographics />
       <About />
       <Testimonials />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
     </div>
   );
 }

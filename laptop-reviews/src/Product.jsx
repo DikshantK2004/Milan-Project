@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { styled } from "@mui/material/styles";
+import { useParams } from "react-router-dom";
 import "./Product.css";
 
 async function dataReturn() {
@@ -135,6 +136,12 @@ function a11yProps(index) {
 }
 
 function Product() {
+  let { name } = useParams();
+  console.log("id here",{name});
+  let name1 = "";
+  if (name  == "macbook") {
+    name1="Macbook"
+  }
   const navigate = useNavigate();
   const user = useAuth();
   const [value, setValue] = React.useState(0);
@@ -183,7 +190,13 @@ function Product() {
   
   const [posted, setPosted] = useState({});
   const [resp, setResp] = useState({});
-  const [Data1, setData1] = useState({battery:[],process:[], display:[], gaming:[], sound:[]});
+  const [Data1, setData1] = useState({
+    battery: [],
+    process: [],
+    display: [],
+    gaming: [],
+    sound: [],
+  });
   const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
   const [lapDat, setLapDat] = useState(null);
   useEffect(() => {
@@ -258,11 +271,11 @@ function Product() {
       <div className="prodfst">
         <img
           className="lappy"
-          src={require("./assets/air.png")}
+          src={require(`./assets/laptop_images/${name1}.png`)}
           alt="laptop-img"
         />
         <div className="prodrightmain">
-          <h1>MacBook Pro</h1>
+          <h1>{name1}</h1>
           <div className="prodprog">
             <div className="progressCirc">
               <Stack spacing={2}>
@@ -280,7 +293,9 @@ function Product() {
                   <Typography sx={{ fontSize: "50px", fontWeight: "700" }}>
                     {!laptop.count
                       ? " "
-                      :Math.round((Data.positive.length / laptop.count) * 100) + "%"}
+                      : Math.round(
+                          (Data.positive.length / laptop.count) * 100
+                        ) + "%"}
                   </Typography>
                 </CircularProgress>
               </Stack>
@@ -452,7 +467,7 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
-        <div className="prorev">
+          <div className="prorev">
             <div className="pro-div">
               <div className="prod-rev">
                 {Data1.process.map((item) => (
@@ -468,7 +483,7 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={3}>
-        <div className="prorev">
+          <div className="prorev">
             <div className="pro-div">
               <div className="prod-rev">
                 {Data1.display.map((item) => (
@@ -484,7 +499,7 @@ function Product() {
           </div>
         </TabPanel>
         <TabPanel value={value} index={4}>
-        <div className="prorev">
+          <div className="prorev">
             <div className="pro-div">
               <div className="prod-rev">
                 {Data1.gaming.map((item) => (
