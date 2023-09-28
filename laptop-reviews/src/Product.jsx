@@ -142,6 +142,9 @@ function Product() {
   if (name  == "macbook") {
     name1="Macbook"
   }
+  if (name == "acrl"){
+    name1="Acer Aspite Lite"
+  }
   const navigate = useNavigate();
   const user = useAuth();
   const [value, setValue] = React.useState(0);
@@ -271,7 +274,7 @@ function Product() {
       <div className="prodfst">
         <img
           className="lappy"
-          src={require(`./assets/laptop_images/${name1}.png`)}
+          src={require(`./assets/laptop_images/${name}.png`)}
           alt="laptop-img"
         />
         <div className="prodrightmain">

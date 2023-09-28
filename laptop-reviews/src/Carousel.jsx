@@ -97,7 +97,7 @@ function Carousel() {
             <img src={require("./assets/laptop_images/Inspiron-15.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/Lenovo -Flex-5.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/lenovo-ideapad-3-lite.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/Macbook.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/macbook.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/Microsoft-Surface-Go.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/MSI.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/Pavillion-15.png")} alt="lappy-img" />

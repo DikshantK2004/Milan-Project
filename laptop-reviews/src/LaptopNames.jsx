@@ -29,7 +29,7 @@ function LaptopNames() {
             <Item><Link to={"/laptop/macbook"}>Macbook Air M1</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Acer Aspire Lite</Link></Item>
+            <Item><Link to={"/laptop/acrl"}>Acer Aspire Lite</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
             <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
