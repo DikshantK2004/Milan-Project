@@ -17,6 +17,7 @@ import Tab from "@mui/material/Tab";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import "./Product.css";
+import Navbar from "./Navbar";
 
 async function dataReturn() {
   const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
@@ -298,6 +299,8 @@ function Product() {
   console.log("data1", Data);
   console.log("data.data", Data1);
   return (
+    <>
+    <Navbar isHome={0}/>
     <div className="product">
       <div className="prodfst">
         <img
@@ -575,6 +578,7 @@ function Product() {
         }}
       />
     </div>
+    </>
   );
 }
 
