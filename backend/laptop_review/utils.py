@@ -1,5 +1,10 @@
 from firebase_admin import auth
+import nltk
+from datetime import datetime
+import pytz
 
+# Create a timezone object for IST (Indian Standard Time)
+ist = pytz.timezone('Asia/Kolkata')
 
 # Verify the user's token
 def verify_id_token(token:str):
@@ -16,8 +21,18 @@ def verify_id_token(token:str):
 def convert_to_rating(x):
     x = round(((x*5)/0.5) * 0.5)
     return x
+
+
+
+# Get current time in IST
+def current_time():
+  now = datetime.now(ist)
+  return now.strftime("%d/%m/%Y")
+
+
 def new_average(initial_average, new_value, count):
     return (initial_average*count + new_value)/(count+1)
+
 def handle_negation(tagged_list):
     negation = False
     result = []
@@ -82,7 +97,7 @@ def aspect_sentiment_analysis(txt, stop_words, nlp):
             if (len(dep_node[i]) == 0):
               continue;
             if (dep_node[i][0] != 0):
-                # print(dep_node[i][0])
+              
                 if (len(newwordList) > int(dep_node[i][0]) - 1):
                   dep_node[i][0] = newwordList[int(dep_node[i][0]) - 1]
 
@@ -90,8 +105,8 @@ def aspect_sentiment_analysis(txt, stop_words, nlp):
         categories = []
         for i in taggedList:
             if i[1] in ('JJ', 'JJR', 'JJS', 'NN', 'NNS', 'RB'):
-                featureList.append(list(i))  # For features for each sentence
-                totalfeatureList.append(list(i))  # Stores the features of all the sentences in the text
+                featureList.append(list(i))  
+                totalfeatureList.append(list(i))  
                 categories.append(i[0])
 
         for i in featureList:
@@ -115,20 +130,9 @@ def aspect_sentiment_analysis(txt, stop_words, nlp):
 
     return finalcluster
 
-# def get_aspect_sentiment(txt, stop_words, nlp):
-#     aspect_sentiment = aspect_sentiment_analysis(txt, stop_words, nlp)
-#     sentence=[]
-#     a=''
-#     for sublist in aspect_sentiment:
-#         a+=sublist[0]+' '
-#         for k in sublist[1]:
-#             a+=k+' '
-#         sentence.append(a)
-#         a=''
-#     return sentence
 
-def get_aspect_scores(review):
-  temp={
+
+fields={
       'battery': -1,
     'process': -1,
     'display': -1,
@@ -136,8 +140,12 @@ def get_aspect_scores(review):
     'sound': -1
 
   }
+
+
+def get_aspect_scores(review, stop_words, nlp, predictor):
+  
   aspect_sentiments = aspect_sentiment_analysis(review, stop_words, nlp)
-  #print(aspect_sentiments)
+
   i = 0
   sentence=[]
   a=''
@@ -146,13 +154,12 @@ def get_aspect_scores(review):
     for k in sublist[1]:
       a+=k+' '
     sentence.append(a)
-    #print(a)
+
     a=''
   for segment in sentence:
     predicted_sentiments = predictor.predict(segment, return_proba=True)
     for stuff in segment.split():
-        for key in temp.keys():
-            if key in stuff.lower():  # Case insensitive match
-                # Do something with the matched key
-               temp[key]=predicted_sentiments[1]
-  return temp         
+        for key in fields.keys():
+            if key in stuff.lower():  
+               fields[key]=predicted_sentiments[1]
+  return fields         
