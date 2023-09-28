@@ -80,7 +80,8 @@ Ensure that you have npm installed.
 ```shell
 npm i --app 
 ```
-
+### Model Link
+https://drive.google.com/drive/folders/1ykhVT2Dvoqj9Xo93a5ZqCi8dytVCcbh7?usp=sharing
 
 ## Contributing
 
