@@ -18,7 +18,7 @@ import { styled } from "@mui/material/styles";
 import "./Product.css";
 
 async function dataReturn() {
-  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
+  const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -27,7 +27,7 @@ async function dataReturn() {
 
 async function getLaptop(laptop)
   {
-    const fetchData = await fetch("http://localhost:8000/score/MacBook Pro", {
+    const fetchData = await fetch("http://192.168.0.112:8000/score/MacBook Pro", {
       method: "GET",
     });
     const dataRes = await fetchData.json();
@@ -44,7 +44,7 @@ async function checkPosted(laptop) {
     console.log("Auth Token couldn't be found");
   }
 
-  const response = await fetch("http://127.0.0.1:8000/", {
+  const response = await fetch("http://192.168.0.112:8000/", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -203,12 +203,12 @@ function Product() {
                 <CircularProgress
                   size="lg"
                   determinate
-                  value={70}
+                  value={Data.positive.length/(laptop.count) * 100}
                   color={70 > 50 ? "success" : "danger"}
                   sx={{ "--CircularProgress-size": "150px" }}
                 >
                   <Typography sx={{ fontSize: "50px", fontWeight: "700" }}>
-                    {data.positive.length()/(laptop.count) * 100} %
+                    {!laptop.count ? " " :Data.positive.length/(laptop.count) * 100} %
                   </Typography>
                 </CircularProgress>
               </Stack>
