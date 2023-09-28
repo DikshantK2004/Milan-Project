@@ -1,0 +1,11 @@
+service.json
+.venv
+.env
+**/.pyc/*
+**/__pycache__/*
+hello.js+
+final.csv
+stanza_resources
+nltk_data
+predictor
+data.zip

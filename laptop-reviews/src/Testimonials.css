@@ -1,0 +1,31 @@
+.testimonials{
+    background-color: #9E3FFD;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.testimonials .head6{
+    color: white;
+    font-size: 25px;
+}
+
+.testtxt{
+    margin-top: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    font-weight: 600;
+    color: white;
+    width: 60%;
+    text-align: center;
+}
+
+.testauth{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: white; 
+    text-align: center;
+}

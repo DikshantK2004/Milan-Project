@@ -1,0 +1,95 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.signup-body{
+    background-color: black;
+    height: 100vh;
+    margin: 0;
+}
+.pagename{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
+    margin-bottom: 2rem;
+}
+.signup-box{
+    width: 24rem;
+    height: 22rem;
+    background-color: #D989FF2B;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signupPage{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    background-image: url(./assets/bgGraphics.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200rem 70rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#mail-box{
+    width: 18rem;
+    height: 2.4rem;
+    border: 2px solid #99AFFFB0;
+    color: white;
+    margin-bottom: 1rem;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    font-family: 'Jeju Gothic', sans-serif;
+    background: transparent;
+}
+#password-box{
+    width: 18rem;
+    height: 2.4rem;
+    border: 2px solid #99AFFFB0;
+    margin-bottom: 1rem;
+    color: white;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    background: transparent;
+    font-family: 'Jeju Gothic', sans-serif;
+}
+#signup-btn{
+    width: 18rem;
+    background-color: #52057B;
+    margin-top: 1rem;
+    color: white;
+    height: 2rem;
+    border-radius: 0.4rem;
+    border-style: none;
+    cursor: pointer;
+    font-family: 'Jeju Gothic', sans-serif;
+    font-size: 1.1rem;
+
+}
+#signup-btn:hover{
+    box-shadow: 1px 1px 20px 5px #6100948A;
+}
+.error-msg{
+    background-color: #FFF5E0;
+    width: fit-content;
+    padding: 0.6rem;
+    color: #C70039;
+    top: 0;
+    text-align: center;
+    font-family: 'Jeju Gothic', sans-serif;
+}
+#new-link{
+    cursor: pointer;
+}
