@@ -142,9 +142,37 @@ function Product() {
   if (name  == "macbook") {
     name1="Macbook"
   }
-  if (name == "acrl"){
+  else if (name == "acasl"){
     name1="Acer Aspite Lite"
   }
+  else if (name == "acas5"){
+    name1="Acer Aspite 5"
+  }
+  else if (name == "asusvi"){
+    name1="ASUS Vivobook"
+  }
+  else if (name == "hpvic"){
+    name1="HP Victus"
+  }
+  else if (name == "insp15"){
+    name1="Dell Inspiron 15"
+  }
+  else if (name == "lenfle5"){
+    name1="Lenovo Flex 5"
+  }
+  else if (name == "mssurgo"){
+    name1="Microsoft Surface GO"
+  }
+  else if (name == "lenip3l"){
+    name1="Lenovo Ideapad 3 Lite"
+  }
+  else if (name == "msi"){
+    name1="MSI"
+  }
+  else if (name == "pac15"){
+    name1="HP Pavillion 15"
+  }
+  
   const navigate = useNavigate();
   const user = useAuth();
   const [value, setValue] = React.useState(0);

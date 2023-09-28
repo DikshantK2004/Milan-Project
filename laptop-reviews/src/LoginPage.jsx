@@ -29,6 +29,7 @@ function LoginPage() {
             .then((userCredential) => {
                 const user = userCredential.user
                 console.log("Signned in successfully", user)
+                navigate("/")
             })
             .catch((error) => {
                 setError(error)
@@ -55,7 +56,7 @@ function LoginPage() {
     return (
         <div className="login-body">
             <div className="loginPage">
-                {error && <div className="error-msg">{error.message}</div>}
+                {error && <div className="error-msg">{"Couldn't Login"}</div>}
                 <div className="pagename">
                     SIGN IN
                 </div>

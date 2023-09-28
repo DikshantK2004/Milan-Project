@@ -91,16 +91,16 @@ function Carousel() {
           <h4>We have a wide range of Laptops reviewed.</h4>
       <div class="carousel" data-gap="50">
           <figure>
-            <img src={require("./assets/laptop_images/Acer-Aspire-LITE.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/ASUS-Vivobook.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/HP-Victus.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/Inspiron-15.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/Lenovo -Flex-5.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/lenovo-ideapad-3-lite.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/acasl.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/asusvi.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/hpvic.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/insp15.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/lenfle5.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/lenip3l.png")} alt="lappy-img" />
             <img src={require("./assets/laptop_images/macbook.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/Microsoft-Surface-Go.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/MSI.png")} alt="lappy-img" />
-            <img src={require("./assets/laptop_images/Pavillion-15.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/mssurgo.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/msi.png")} alt="lappy-img" />
+            <img src={require("./assets/laptop_images/pav15.png")} alt="lappy-img" />
           </figure>
         <nav>
           <button className="nav prev">

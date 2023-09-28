@@ -29,34 +29,34 @@ function LaptopNames() {
             <Item><Link to={"/laptop/macbook"}>Macbook Air M1</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop/acrl"}>Acer Aspire Lite</Link></Item>
+            <Item><Link to={"/laptop/acasl"}>Acer Aspire LITE</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/acas5"}>Acer Aspire 5</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/asusvi"}>ASUS Vivobook</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/hpvic"}>HP Victus</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/insp15"}>Dell Inspiron 15</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/lenip3l"}>Lenovo Ideapad 3 Lite</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/lenfle5"}>Lenovo Flex 5</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/msi"}>MSI</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/pav15"}>HP Pavillion 15</Link></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><Link to={"/laptop"}>Macbook Air M1</Link></Item>
+            <Item><Link to={"/laptop/mssurgo"}>Microsoft Surface Go</Link></Item>
           </Grid>
         </Grid>
       </Box>
