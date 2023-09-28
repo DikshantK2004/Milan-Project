@@ -73,6 +73,7 @@
 }
 
 .product {
+  text-align: center;
   margin: 100px 0 100px;
   background-image: url("./assets/background-img.png");
   width: 100vw;
@@ -118,11 +119,7 @@
   margin: 10px;
 }
 
-.boxdiv {
-  width: fit-content;
-  border-radius: 30px;
-  padding: 0 20px;
-}
+
 
 .prod-rev {
   display: flex;

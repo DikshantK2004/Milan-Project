@@ -18,9 +18,7 @@ const labels = {
   
 
 function ReviewComponent(props) {
-
-
-
+  
   return (
     <div>
       <div className="item3">

@@ -204,11 +204,11 @@ function Product() {
                   size="lg"
                   determinate
                   value={Data.positive.length/(laptop.count) * 100}
-                  color={70 > 50 ? "success" : "danger"}
+                  color={Data.positive.length/(laptop.count) * 100 >= 50 ? "success" : "danger"}
                   sx={{ "--CircularProgress-size": "150px" }}
                 >
                   <Typography sx={{ fontSize: "50px", fontWeight: "700" }}>
-                    {!laptop.count ? " " :Data.positive.length/(laptop.count) * 100} %
+                    {!laptop.count ? " " :Data.positive.length/(laptop.count) * 100+"%"}
                   </Typography>
                 </CircularProgress>
               </Stack>
