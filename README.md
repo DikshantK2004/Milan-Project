@@ -1,18 +1,16 @@
-# Milan-Project
-
-## Idea
-
 # MILAN Hostel Hackathon Project
 
-
 ## Table of Contents
-- [Introduction](#introduction)
-- [Project Description](#project-description)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [MILAN Hostel Hackathon Project](#milan-hostel-hackathon-project)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Project Description](#project-description)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [Contributing](#contributing)
 
 ## Introduction
 
@@ -41,6 +39,9 @@ Our sentiment analysis model helps users understand the general sentiment (posit
 
 ## Installation
 
+```text
+NOTE : These commands were tested on Ubuntu 22.04 .
+```
 To run this project locally, follow these steps:
 
 1. Clone the repository to your local machine:
@@ -56,11 +57,30 @@ The application should now be running locally on your machine.
 
 ## Usage
 
-1. Visit the website using your web browser.
-2. Search for a laptop model or explore the available options.
-3. View detailed information about a laptop.
-4. Submit your own reviews or opinions on laptops.
-5. See the sentiment analysis results for reviews.
+Git clone this repository in your machine.
+
+### Backend
+
+Ensure you have python version install 3.11 .
+```shell
+pip install fastapi = "^0.103.1"
+pip install firebase = "^4.0.1"
+pip install python-dotenv = "^1.0.0"
+pip install uvicorn = "^0.23.2"
+pip install firebase-admin = "^6.2.0"
+pip install tensorflow = "^2.13.0"
+pip install pandas = "^2.1.1"
+pip install cython = "^3.0.2"
+pip install ktrain = "^0.38.0"
+```
+
+### Frontend
+
+Ensure that you have npm installed.
+```shell
+npm i --app 
+```
+
 
 ## Contributing
 
