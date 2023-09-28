@@ -567,7 +567,41 @@ function Product() {
       </Box>
 
       
-      {show_review()}
+      {/* {show_review()} */}
+
+
+      (<div className="inputreview">
+        <h4>Tell us what you feel about this Laptop?</h4>
+        <div className="reviewInput">
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "100ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="filled-multiline-flexible"
+                label="Your Review"
+                multiline
+                maxRows={4}
+                variant="filled"
+                value={review}
+                onInput={handler}
+              />
+            </div>
+          </Box>
+        </div>
+        <Button
+          variant="outlined"
+          sx={{ color: "black" }}
+          onClick={handleReviewSubmit}
+        >
+          Submit
+        </Button>
+      </div>
       <hr
         style={{
           backgroundColor: "#692AA9",
