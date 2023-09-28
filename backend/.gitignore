@@ -3,6 +3,9 @@ service.json
 .env
 **/.pyc/*
 **/__pycache__/*
-models
-hello.js
+hello.js+
 final.csv
+stanza_resources
+nltk_data
+predictor
+data.zip

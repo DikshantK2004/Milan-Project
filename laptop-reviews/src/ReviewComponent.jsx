@@ -16,11 +16,8 @@ const labels = {
     5: "Excellent+",
   };
   
-  const value = 4.5;
 
 function ReviewComponent(props) {
-
-
 
   return (
     <div>
@@ -28,7 +25,7 @@ function ReviewComponent(props) {
         <div className="boxdiv">
           <Box
             sx={{
-              width: 200,
+              width: "auto",
               display: "flex",
               alignItems: "center",
             }}
@@ -38,6 +35,7 @@ function ReviewComponent(props) {
               value={props.score}
               readOnly
               precision={0.5}
+              size="large"
               emptyIcon={
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
@@ -48,7 +46,7 @@ function ReviewComponent(props) {
         {props.review}
         <br />
         <span>
-          <span style={{ textAlign: "center", fontSize: "13px" }}>- {props.username}</span>
+          <span style={ { textAlign: "center", fontSize: "13px" }}>- {props.username}</span>
           <br />
           <span style={{ textAlign: "center", fontSize: "13px" }}>
             {props.date}

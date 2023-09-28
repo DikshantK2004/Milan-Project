@@ -6,17 +6,23 @@ import About from "./About";
 import Testimonials from "./Testimonials";
 import Carousel from "./Carousel";
 import Product from "./Product";
+import LaptopNames from './LaptopNames';
+
 
 function HomePage() {
   return (
     <div className="App">
-      <Product />
       <Navbar />
       <Carousel />
+      <LaptopNames />
       <Services />
       <Infographics />
       <About />
       <Testimonials />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
     </div>
   );
 }

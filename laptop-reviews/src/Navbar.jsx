@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <div className="back-img">
       <div className="navbar">
-        <div className="logo-gen">Jcube</div>
+        <div className="logo-gen">Only<span style={{color:"rgba(22, 22, 63, 0.9)"}}>Reviews</span></div>
         <div className="navs">
           <div className="item">Home</div>
           <div className="item">About</div>
