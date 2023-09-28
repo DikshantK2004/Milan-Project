@@ -38,6 +38,7 @@ function ReviewComponent(props) {
               value={props.score}
               readOnly
               precision={0.5}
+              size="large"
               emptyIcon={
                 <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
               }
@@ -48,7 +49,7 @@ function ReviewComponent(props) {
         {props.review}
         <br />
         <span>
-          <span style={{ textAlign: "center", fontSize: "13px" }}>- {props.username}</span>
+          <span style={ { textAlign: "center", fontSize: "13px" }}>- {props.username}</span>
           <br />
           <span style={{ textAlign: "center", fontSize: "13px" }}>
             {props.date}

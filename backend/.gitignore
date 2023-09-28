@@ -4,5 +4,5 @@ service.json
 **/.pyc/*
 **/__pycache__/*
 predictor
-hello.js
+hello.js+
 final.csv
