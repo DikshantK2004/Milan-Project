@@ -148,7 +148,7 @@ function Product() {
           <div className="prod-rev">
             {Data.positive.map((item) => (
               <ReviewComponent
-                review={"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta architecto laboriosam molestias possimus ab. Eveniet illum eaque voluptatum nulla facilis sed consequatur sint fugiat numquam accusantium, ipsum quidem voluptate dolor fugit, nam placeat amet officia quos. Doloribus fugiat eius porro amet delectus architecto expedita, aspernatur eveniet perferendis ipsum adipisci ipsa quod autem distinctio, tenetur, tempore eaque accusantium perspiciatis! Perspiciatis, aperiam!"}
+                review={item.review}
                 score={item.score}
                 username={item.username}
                 date={item.date}
