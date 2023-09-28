@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import tensorflow as tf
 import pandas as pd
 import ktrain
-from models import Review
+from models import Review, Info
 import utils
 import nltk
 import numpy as np
@@ -107,7 +107,43 @@ async def create_laptop(laptop:str):
     path.set(data)
     return {"alert" : True}
     
+
+@app.post('/check')
+def check_posted(info : Info):
     
+    laptop = info.laptop
+    user_id = info.user_id
+    token = info.token
+    print(laptop)
+    
+    if laptop not in laptops:
+        return {"alert" : False, "message" : f"{laptop} is not in database.", "laptop" : laptop}
+    
+    
+    uid = utils.verify_id_token(token)
+    
+    if uid == None:
+        return {"alert" : False, "message" : "Token verification failed."}
+    
+    
+    if uid != user_id:
+        return {"alert" : False, "message" :"Token not authenticated with user."}
+    
+    
+    docs = db.collection('laptops').document(laptop).collection('reviews').stream()
+    temp = [doc.id for doc in docs]
+    
+    if user_id not in temp:
+        return {"alert" : False, "message" : "User has not posted yet"}
+    
+    
+    rev = db.collection('laptops').document(laptop).collection('reviews').document(user_id)
+    
+    review = rev.get().to_dict()
+    
+    return {"alert" : True, "review" : review['review']}
+
+
 @app.get('/score')
 def getter():
     return {"alert" : "Don't think we are gonna make it"}
@@ -137,14 +173,14 @@ def post_new_review(review: Review):
     if laptop not in laptops:
         return {"alert" : False, "message" : f"{laptop} is not in database."}
 
-    # uid = utils.verify_id_token(review.token)
+    uid = utils.verify_id_token(review.token)
     
-    # if uid == None:
-    #     return {"alert" : False, "message" : "Token verification failed."}
+    if uid == None:
+        return {"alert" : False, "message" : "Token verification failed."}
     
     
-    # if uid != review.user_id:
-    #     return {"alert" : False, "message" :"Token not authenticated with user."}
+    if uid != review.user_id:
+        return {"alert" : False, "message" :"Token not authenticated with user."}
 
 
     positive_score = predictor.predict(review.review, return_proba = True)[1].item()
@@ -219,4 +255,3 @@ def get_reviews(laptop:str):
 
 
 
-    

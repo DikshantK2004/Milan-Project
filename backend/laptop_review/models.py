@@ -6,3 +6,8 @@ class Review(BaseModel):
     review:str
     laptop:str
     token: str
+    
+class Info(BaseModel):
+    laptop : str
+    user_id : str
+    token : str

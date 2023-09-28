@@ -51,7 +51,7 @@ async function checkPosted(laptop) {
     console.log("Auth Token couldn't be found");
   }
 
-  const response = await fetch("http://192.168.0.112:8000/", {
+  const response = await fetch("http://192.168.0.112:8000/check", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -151,6 +151,8 @@ function Product() {
     setReview(event.target.value);
   };
 
+
+  
   const handleReviewSubmit = async () => {
     if (user) {
       const authToken = await user.getIdToken();
@@ -164,11 +166,21 @@ function Product() {
         review: review,
         laptop: "MacBook Pro",
       };
+
+      const fetchData = await fetch("http://192.168.0.112:8000/new_review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviewData)
+      });
+  const dataRes = await fetchData.json();
+
     } else {
       navigate("/login");
     }
   };
-
+  
   const [posted, setPosted] = useState({});
   const [resp, setResp] = useState({});
   const [Data1, setData1] = useState({battery:[],process:[], display:[], gaming:[], sound:[]});
@@ -192,6 +204,52 @@ function Product() {
     fetchData();
   }, []);
 
+  function show_review()
+  {
+      if (! posted.alert)
+      {
+        return (<div className="inputreview">
+        <h4>Tell us what you feel about this Laptop?</h4>
+        <div className="reviewInput">
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "100ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="filled-multiline-flexible"
+                label="Your Review"
+                multiline
+                maxRows={4}
+                variant="filled"
+                value={review}
+                onInput={handler}
+              />
+            </div>
+          </Box>
+        </div>
+        <Button
+          variant="outlined"
+          sx={{ color: "black" }}
+          onClick={handleReviewSubmit}
+        >
+          Submit
+        </Button>
+      </div>)
+      }
+      else
+      {
+        return (
+          <div>
+            {posted.review}
+          </div>
+        )
+      }
+  }
   console.log("laptop here", laptop);
   console.log("data1", Data);
   console.log("data.data", Data1);
@@ -459,39 +517,8 @@ function Product() {
         </TabPanel>
       </Box>
 
-      <div className="inputreview">
-        <h4>Tell us what you feel about this Laptop?</h4>
-        <div className="reviewInput">
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "100ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                id="filled-multiline-flexible"
-                label="Your Review"
-                multiline
-                maxRows={4}
-                variant="filled"
-                value={review}
-                onInput={handler}
-              />
-            </div>
-          </Box>
-        </div>
-        <Button
-          variant="outlined"
-          sx={{ color: "black" }}
-          onClick={handleReviewSubmit}
-        >
-          Submit
-        </Button>
-      </div>
-
+      
+      {show_review()}
       <hr
         style={{
           backgroundColor: "#692AA9",
