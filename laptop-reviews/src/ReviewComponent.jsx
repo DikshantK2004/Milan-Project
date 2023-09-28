@@ -16,7 +16,6 @@ const labels = {
     5: "Excellent+",
   };
   
-  const value = 4.5;
 
 function ReviewComponent(props) {
 

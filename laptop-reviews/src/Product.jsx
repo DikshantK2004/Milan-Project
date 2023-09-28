@@ -12,6 +12,7 @@ import { signOut, getAuth } from "firebase/auth";
 import { app } from "./firebase.config";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -25,36 +26,71 @@ async function dataReturn() {
   return dataRes;
 }
 
-function Product() {
-  const user = useAuth();
-  const auth = getAuth(app);
-  if (user) {
-    user
-      .getIdToken()
-      .then((authToken) => {
-        console.log("Authentication token:", authToken);
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
-  }
-  const [review, setReview] = useState("");
-  const handler = async (event) => {
-    event.preventDefault();
-    setReview(event.target.value);
-  };
-  const [nul, setNul] = useState(0);
-  const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
+async function checkPosted( laptop){
+  const user= getAuth().currentUser;
+  console.log(user);
+  if(!user) return null;
+  const authToken = await user.getIdToken();
 
+    if(!authToken) {console.log("Auth Token couldn't be found"); }
+
+  const response = await fetch("http://localhost:8000/",
+  {
+    method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({"user_id" : user.uid, "token" : authToken, "laptop" : laptop}),
+  });
+
+  const dataRes = await response.json();
+
+  return dataRes;
+
+}
+function Product() {
+
+  const navigate = useNavigate();
+
+  const user = useAuth();
+  // console.log(user);
+  const [review, setReview] = useState("");
+    const handler = async (event) => {
+      event.preventDefault();
+      setReview(event.target.value);
+    }
+
+  
+  const handleReviewSubmit = async () => {
+    if (user) {
+      const authToken = await user.getIdToken();
+
+      if(!authToken) console.log("Auth Token couldn't be found");
+
+      const reviewData = {"username" : user.displayName, "user_id": user.uid, "token" : authToken, "review" : review, "laptop" : "MacBook Pro"};
+      
+    }
+    else
+    {
+        navigate('/login');
+    }
+    
+  }
+  
+  const [nul, setNul] = useState(0);
+  const [posted, setPosted] = useState({});
+  const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
   useEffect(() => {
     const fetchData = async () => {
       const response = await dataReturn();
+      const response2 = await checkPosted( "MacBook Pro");
       setData(response);
+      setPosted(response2);
     };
 
     fetchData();
   }, []);
-
+  
   return (
     <div className="product">
       <div className="prodfst">
@@ -195,7 +231,7 @@ function Product() {
             </div>
           </Box>
         </div>
-        <Button variant="outlined" sx={{ color: "black" }}>
+        <Button variant="outlined" sx={{ color: "black" }} onClick = {handleReviewSubmit}>
           Submit
         </Button>
       </div>
