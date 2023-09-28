@@ -18,12 +18,21 @@ import { styled } from "@mui/material/styles";
 import "./Product.css";
 
 async function dataReturn() {
-  const fetchData = await fetch("http://127.0.0.1:8000/MacBook Pro", {
+  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
     method: "GET",
   });
   const dataRes = await fetchData.json();
   return dataRes;
 }
+
+async function getLaptop(laptop)
+  {
+    const fetchData = await fetch("http://localhost:8000/score/MacBook Pro", {
+      method: "GET",
+    });
+    const dataRes = await fetchData.json();
+    return dataRes.response;
+  }
 
 async function checkPosted(laptop) {
   const user = getAuth().currentUser;
@@ -119,6 +128,7 @@ function a11yProps(index) {
 }
 
 function Product() {
+  const laptop_name = "MacBook Pro";
   const navigate = useNavigate();
   const user = useAuth();
   const [value, setValue] = React.useState(0);
@@ -126,8 +136,10 @@ function Product() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // console.log(user);
+  
   const [review, setReview] = useState("");
+  const [laptop, setLaptop] = useState({});
+  // const [laptopData, setlaptopdata] = useState({});
   const handler = async (event) => {
     event.preventDefault();
     setReview(event.target.value);
@@ -151,20 +163,30 @@ function Product() {
     }
   };
 
-  const [nul, setNul] = useState(0);
+  
   const [posted, setPosted] = useState({});
+  const [resp, setResp] = useState({});
   const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
+  const [lapDat, setLapDat] = useState(null)
   useEffect(() => {
     const fetchData = async () => {
       const response = await dataReturn();
       const response2 = await checkPosted("MacBook Pro");
+      const response3 = await getLaptop('MacBook Pro');
+      console.log("inside useeffcet");
       setData(response);
       setPosted(response2);
+      setLaptop(response3);
+      setResp(response3)
+      console.log("laptop inside use", resp);
+      // setData(resp)
     };
 
     fetchData();
   }, []);
 
+  console.log("laptop here", laptop);
+  console.log("dt", Data);
   return (
     <div className="product">
       <div className="prodfst">
@@ -174,7 +196,7 @@ function Product() {
           alt="laptop-img"
         />
         <div className="prodrightmain">
-          <h1>Apple Air M1</h1>
+          <h1>MacBook Pro</h1>
           <div className="prodprog">
             <div className="progressCirc">
               <Stack spacing={2}>
@@ -186,61 +208,61 @@ function Product() {
                   sx={{ "--CircularProgress-size": "150px" }}
                 >
                   <Typography sx={{ fontSize: "50px", fontWeight: "700" }}>
-                    70%
+                    {data.positive.length()/(laptop.count) * 100} %
                   </Typography>
                 </CircularProgress>
               </Stack>
             </div>
             <div className="prodcatr">
               <div className="item4">
-                Battery
-                <Rating
+              Battery
+                {laptop.battery_score!==-1?<Rating
                   name="read-only"
-                  value={3}
+                  value={Math.ceil(laptop.battery_score/0.5)*0.5}
                   precision={0.5}
                   size="large"
                   readOnly
-                />
+                />:<div style={{fontWeight:"400"}}>No Battery Reviews Yet!!</div>}
               </div>
               <div className="item4">
-                Processor
-                <Rating
+              Processor
+                {laptop.process_score!==-1?<Rating
                   name="read-only"
-                  value={4}
+                  value={Math.ceil(laptop.process_score/0.5)*0.5}
                   precision={0.5}
                   size="large"
                   readOnly
-                />
+                />:<div style={{fontWeight:"400"}}>No Processor Reviews Yet!!</div>}
               </div>
               <div className="item4">
-                Display
-                <Rating
+              Display
+                {laptop.display_score!==-1?<Rating
                   name="read-only"
-                  value={4.5}
+                  value={Math.ceil(laptop.display_score/0.5)*0.5}
                   precision={0.5}
                   size="large"
                   readOnly
-                />
+                />:<div style={{fontWeight:"400"}}>No Display Reviews Yet!!</div>}
               </div>
               <div className="item4">
-                Gaming
-                <Rating
+              Gaming
+                {laptop.gaming_score!==-1?<Rating
                   name="read-only"
-                  value={2.5}
+                  value={Math.ceil(laptop.gaming_score/0.5)*0.5}
                   precision={0.5}
                   size="large"
                   readOnly
-                />
+                />:<div style={{fontWeight:"400"}}>No Gaming Reviews Yet!!</div>}
               </div>
               <div className="item4">
                 Sound
-                <Rating
+                {laptop.sound_score!==-1?<Rating
                   name="read-only"
-                  value={1}
+                  value={Math.ceil(laptop.sound_score/0.5)*0.5}
                   precision={0.5}
                   size="large"
                   readOnly
-                />
+                />:<div style={{fontWeight:"400"}}>No Sound Reviews Yet!!</div>}
               </div>
             </div>
           </div>

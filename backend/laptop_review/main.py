@@ -77,6 +77,28 @@ async def create_laptop(laptop:str):
     path.set(data)
     return {"alert" : True}
     
+    
+@app.get('/score')
+def getter():
+    return {"alert" : "Don't think we are gonna make it"}
+
+
+@app.get('/score/{laptop}')
+async def get_laptop(laptop:str):
+    if laptop not in laptops:
+        return {"alert" : False, "message" : f"{laptop} not in database"}
+    
+    path = db.collection('laptops').document(laptop)
+    
+    data = path.get().to_dict()
+    
+    print(data)
+    
+    return {"alert" : True, "response" : data}
+    
+    
+
+
 @app.post('/new_review')
 def post_new_review(review: Review):
     laptop = review.laptop
@@ -116,13 +138,15 @@ def post_new_review(review: Review):
 
     
     doc_dict['score'] = utils.new_average(doc_dict['score'], positive_score, doc_dict['count'])
+
+    
     doc_dict['count'] += 1
     
     for key in aspect_scores:
         if aspect_scores[key] != -1:
             if doc_dict[key+'_score'] == -1:
                 doc_dict[key+'_score'] = 0
-            doc_dict[key] = utils.new_average(doc_dict[key+'_score'], aspect_scores[key], doc_dict[key+'_count'])
+            doc_dict[key+'_score'] = utils.new_average(doc_dict[key+'_score'], aspect_scores[key], doc_dict[key+'_count'])
             doc_dict[key+'_count'] += 1
     doc_ref.set(doc_dict)
     return {"alert": True}

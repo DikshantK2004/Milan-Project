@@ -40,7 +40,7 @@ def handle_negation(tagged_list):
         if word.lower() == "not" or word.lower() == "neither":
             negation = not negation
         elif negation and tag in ('JJ', 'JJR', 'JJS'):
-            result.append(('not ' + word, tag))  # Prefix adjective with "not_"
+            result.append(('not' + word, tag))  # Prefix adjective with "not_"
             negation = False
         else:
             result.append((word, tag))
