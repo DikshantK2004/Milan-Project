@@ -72,6 +72,8 @@ pip install tensorflow
 pip install pandas
 pip install cython
 pip install ktrain
+pip install nltk
+pip install stanza
 ```
 
 ### Frontend
