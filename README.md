@@ -74,6 +74,7 @@ pip install cython
 pip install ktrain
 pip install nltk
 pip install stanza
+pip install --upgrade pydantic fastapi typing-extensions
 ```
 
 ### Frontend
