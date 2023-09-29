@@ -63,15 +63,15 @@ Git clone this repository in your machine.
 
 Ensure you have python version install 3.11 .
 ```shell
-pip install fastapi = "^0.103.1"
-pip install firebase = "^4.0.1"
-pip install python-dotenv = "^1.0.0"
-pip install uvicorn = "^0.23.2"
-pip install firebase-admin = "^6.2.0"
-pip install tensorflow = "^2.13.0"
-pip install pandas = "^2.1.1"
-pip install cython = "^3.0.2"
-pip install ktrain = "^0.38.0"
+pip install fastapi
+pip install firebase
+pip install python-dotenv
+pip install uvicorn
+pip install firebase-admin
+pip install tensorflow
+pip install pandas
+pip install cython
+pip install ktrain
 ```
 
 ### Frontend
