@@ -16,15 +16,15 @@ import stanza
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 # Create a stanza pipeline
-nltk.data.path.append(os.path.dirname(_file_) + "/../nltk_data")
-nlp = stanza.Pipeline(dir = os.path.dirname(_file_) + "/../stanza_resources")
+nltk.data.path.append(os.path.dirname(__file__) + "/../nltk_data")
+nlp = stanza.Pipeline(dir = os.path.dirname(__file__) + "/../stanza_resources")
 
 stop_words = set(stopwords.words('english'))  #here we segment data , so we need those categories
 predictor = ktrain.load_predictor('predictor')
 
 load_dotenv()
 
-cred = credentials.Certificate(os.path.dirname(_file_) + '/service.json')
+cred = credentials.Certificate(os.path.dirname(__file__) + '/service.json')
 firebase_admin.initialize_app(cred)
 
 

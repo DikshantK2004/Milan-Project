@@ -20,7 +20,7 @@ import "./Product.css";
 import Navbar from "./Navbar";
 
 async function dataReturn() {
-  const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
+  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -28,7 +28,7 @@ async function dataReturn() {
 }
 
 async function dataReturnData() {
-  const fetchData = await fetch("http://192.168.0.112:8000/MacBook Pro", {
+  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -36,7 +36,7 @@ async function dataReturnData() {
 }
 
 async function getLaptop(laptop) {
-  const fetchData = await fetch("http://192.168.0.112:8000/score/MacBook Pro", {
+  const fetchData = await fetch("http://localhost:8000/score/MacBook Pro", {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -46,14 +46,14 @@ async function getLaptop(laptop) {
 async function checkPosted(laptop) {
   const user = getAuth().currentUser;
   console.log(user);
-  if (!user) return null;
+  if (!user) return {"alert" : false};
   const authToken = await user.getIdToken();
 
   if (!authToken) {
     console.log("Auth Token couldn't be found");
   }
 
-  const response = await fetch("http://192.168.0.112:8000/check", {
+  const response = await fetch("http://localhost:8000/check", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -206,7 +206,7 @@ function Product() {
         laptop: "MacBook Pro",
       };
 
-      const fetchData = await fetch("http://192.168.0.112:8000/new_review", {
+      const fetchData = await fetch("http://localhost:8000/new_review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -567,50 +567,10 @@ function Product() {
       </Box>
 
       
-      {/* {show_review()} */}
+      {show_review()}
 
 
-      (<div className="inputreview">
-        <h4>Tell us what you feel about this Laptop?</h4>
-        <div className="reviewInput">
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "100ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                id="filled-multiline-flexible"
-                label="Your Review"
-                multiline
-                maxRows={4}
-                variant="filled"
-                value={review}
-                onInput={handler}
-              />
-            </div>
-          </Box>
-        </div>
-        <Button
-          variant="outlined"
-          sx={{ color: "black" }}
-          onClick={handleReviewSubmit}
-        >
-          Submit
-        </Button>
-      </div>
-      <hr
-        style={{
-          backgroundColor: "#692AA9",
-          color: "#692AA9",
-          borderColor: "white",
-          height: "2px",
-          padding: "0.7px 0",
-        }}
-      />
+    
     </div>
     </>
   );
