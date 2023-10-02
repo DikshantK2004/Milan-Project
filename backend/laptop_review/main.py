@@ -106,6 +106,11 @@ async def create_laptop(laptop:str):
     return {"alert" : True}
     
 
+
+@app.get('/getLaptop')
+def get_laptop():
+    return laptops
+
 @app.post('/check')
 def check_posted(info : Info):
     
@@ -152,7 +157,7 @@ async def get_laptop(laptop:str):
         return {"alert" : False, "message" : f"{laptop} not in database"}
     
     path = db.collection('laptops').document(laptop)
-    
+    print(laptop)
     data = path.get().to_dict()
 
     
@@ -214,8 +219,12 @@ def post_new_review(review: Review):
     return {"alert": True}
 
 
+
+@app.get('/laptop')
+def another_getter():
+    return {"message" : "Just another getter"}
 # getting reviews for laptop
-@app.get('/{laptop}')
+@app.get('/laptop/{laptop}')
 def get_reviews(laptop:str):
     if laptop not in laptops:
         return {"alert" : False, "message" : f"{laptop} is not in database."}

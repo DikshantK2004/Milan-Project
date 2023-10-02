@@ -19,16 +19,16 @@ import { useParams } from "react-router-dom";
 import "./Product.css";
 import Navbar from "./Navbar";
 
-async function dataReturn() {
-  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
+async function dataReturn(laptop) {
+  const fetchData = await fetch(`http://localhost:8000/laptop/${laptop}`, {
     method: "GET",
   });
   const dataRes = await fetchData.json();
   return dataRes;
 }
 
-async function dataReturnData() {
-  const fetchData = await fetch("http://localhost:8000/MacBook Pro", {
+async function dataReturnData(laptop) {
+  const fetchData = await fetch(`http://localhost:8000/laptop/${laptop}`, {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -36,7 +36,7 @@ async function dataReturnData() {
 }
 
 async function getLaptop(laptop) {
-  const fetchData = await fetch("http://localhost:8000/score/MacBook Pro", {
+  const fetchData = await fetch(`http://localhost:8000/score/${laptop}`, {
     method: "GET",
   });
   const dataRes = await fetchData.json();
@@ -190,20 +190,30 @@ function Product() {
     setReview(event.target.value);
   };
 
+  const fetchData = async () => {
+    const response = await dataReturn(name);
+    const response2 = await checkPosted(name);
+    const response3 = await getLaptop(name);
+    const response4 = await dataReturnData(name);
+    setData(response);
+    setPosted(response2);
+    setLaptop(response3);
+    setData1(response4);
 
+  };
   
   const handleReviewSubmit = async () => {
     if (user) {
       const authToken = await user.getIdToken();
 
-      if (!authToken) console.log("Auth Token couldn't be found");
+      if (!authToken) console.log("Auth Token can't be found");
 
       const reviewData = {
         username: user.displayName,
         user_id: user.uid,
         token: authToken,
         review: review,
-        laptop: "MacBook Pro",
+        laptop: name,
       };
 
       const fetchData = await fetch("http://localhost:8000/new_review", {
@@ -215,6 +225,8 @@ function Product() {
       });
   const dataRes = await fetchData.json();
 
+  window.location.reload();
+      
     } else {
       navigate("/login");
     }
@@ -229,23 +241,10 @@ function Product() {
     gaming: [],
     sound: [],
   });
-  const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
-  const [lapDat, setLapDat] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await dataReturn();
-      const response2 = await checkPosted("MacBook Pro");
-      const response3 = await getLaptop("MacBook Pro");
-      const response4 = await dataReturnData();
-      console.log("inside useeffcet");
-      setData(response);
-      setPosted(response2);
-      setLaptop(response3);
-      setData1(response4);
-      console.log("laptop inside use", resp);
-      // setData(resp)
-    };
 
+  
+  const [Data, setData] = useState({ alert: true, positive: [], negative: [] });
+  useEffect(() => {
     fetchData();
   }, []);
 
